@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 var TokenSchema = new Schema({
   token: {
     type: String,
+    unique : true,
     Required: 'Please enter the tokenID of the device'
   },
   createdDate: {

@@ -5,4 +5,7 @@ module.exports = function(app) {
   app.route('/tokens')
     .get(tokenController.list_all_tokens)
     .post(tokenController.create_a_token);
+
+  app.route('/send')
+  	.post(tokenController.send_a_notification);
 };
