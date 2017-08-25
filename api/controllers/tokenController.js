@@ -2,10 +2,11 @@
 
 var mongoose = require('mongoose'),
   Token = mongoose.model('Tokens');
+  TokenAndroid = mongoose.model('TokensAndroid')
 
   // Push notifications parameters
   const apn = require("apn");
-    
+
     var options = {
       token: {
         key: "tripopt_apn.p8",
@@ -42,8 +43,8 @@ exports.create_a_token = function(req, res) {
     res.send({
       "message":'the token already exists'
     });
-   } 
-  })  
+   }
+  })
 };
 
 
@@ -57,8 +58,17 @@ exports.delete_a_task = function(req, res) {
   });
 };
 
+exports.create_token_android = function(req,res){
+
+  // Model mongoose !
+  
+}
+
 
 exports.send_a_notification = function (req,res){
+
+ // IOS
+
     var tokens = []
     // Saving all tokens in a table
     Token.find({}, function(err, token) {
@@ -71,7 +81,7 @@ exports.send_a_notification = function (req,res){
 
         console.log("tokens =")
         console.log(tokens)
-        // Push notifications  code 
+        // Push notifications  code
         let note = new apn.Notification({
           alert:  req.body.message,
         });
@@ -82,7 +92,7 @@ exports.send_a_notification = function (req,res){
         // console.log(`Sending: ${note.compile()} to ${tokens}`);
 
         service.send(note, tokens).then( result => {
-      
+
             res.json({
               "message": req.body.message,
               "sent": result.sent.length,
@@ -95,10 +105,14 @@ exports.send_a_notification = function (req,res){
     });
 
 
-   
+// Android
+
+
+
+
+
+
 
 
 
 }
-
-
